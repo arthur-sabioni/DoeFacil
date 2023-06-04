@@ -1,5 +1,7 @@
 package interfaces;
 
-public class Interface {
+public interface Interface {
+
+    public void mostrarOpcoes();
     
 }
