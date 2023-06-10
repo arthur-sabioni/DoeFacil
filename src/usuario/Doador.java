@@ -19,7 +19,11 @@ public class Doador {
     }
 
     public String getIdentificador(){
-        return null; // cpf ou cnpj, dependendo do TipoDoador. Vai ter lógica nisso?
+        return this.identificador; // cpf ou cnpj, dependendo do TipoDoador.
+    }
+
+    public void setIdentificador(String identificador) {
+        this.identificador = identificador;
     }
 
     public String getNome() {
@@ -36,10 +40,6 @@ public class Doador {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public void setIdentificador(String identificador) {
-        this.identificador = identificador;
     }
 
     public String getTelefone() {
@@ -65,6 +65,5 @@ public class Doador {
     public void setTipo(TipoDoador tipo) {
         this.tipo = tipo;
     }
-    
 
 }

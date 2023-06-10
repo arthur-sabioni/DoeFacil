@@ -7,7 +7,10 @@ public class Sistema {
         InterfaceCadastro ic = new InterfaceCadastro();
 
         while(true){
-            ic.mostrarOpcoes();
+            while(ic.doadorLogado()==null)
+                ic.mostrarOpcoes();
+            InterfaceDoador id = new InterfaceDoador(ic.doadorLogado());
+            id.mostrarOpcoes();
         }
 
     }
