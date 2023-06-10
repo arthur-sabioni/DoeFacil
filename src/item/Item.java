@@ -17,10 +17,10 @@ public class Item {
     private Doador doador;
     private ArrayList<Interesse> interessados;
 
-    public Item(String nome, TipoItem tipo, String descricao, File foto, String localizacao, Doador doador){
+    public Item(int id, String nome, TipoItem tipo, String descricao, File foto, String localizacao, Doador doador){
 
         this.status = Status.pendente;
-        this.id = 0; // Ver como faremos com o ID depois. Quem vai controlar os IDs?
+        this.id = id;
         this.nome = nome;
         this.tipo = tipo;
         this.descricao = descricao;
@@ -31,37 +31,33 @@ public class Item {
     }
 
     //  Caso nao tenha foto
-    public Item(String nome, TipoItem tipo, String descricao, String localizacao, Doador doador){
+    public Item(int id, String nome, TipoItem tipo, String descricao, String localizacao, Doador doador){
 
         this.status = Status.pendente;
-        this.id = 0; // Ver como faremos com o ID depois. Quem vai controlar os IDs?
+        this.id = id;
         this.nome = nome;
         this.tipo = tipo;
         this.descricao = descricao;
         this.foto = null;
         this.localizacao = localizacao;
-        this.interessados = new ArrayList<>();
+        this.interessados = new ArrayList<Interesse>();
         
     }
 
     public void deletar(){
-
+        this.status = Status.deletado;
     }
 
     public void exibir(){
-        
+        System.out.println(this.toString());
     }
 
-    public void interessados(){
-        
-    }
-
-    public void demonstrarInteresse(Doador user, String justificativa){
-        
+    public boolean demonstrarInteresse(Doador user, String justificativa){
+        return this.interessados.add(new Interesse(user, justificativa));
     }
 
     public void doar(){
-        
+        this.status = Status.doado;
     }
 
     public Status getStatus() {
