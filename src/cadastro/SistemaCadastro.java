@@ -1,22 +1,39 @@
 package cadastro;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import usuario.Administrador;
 import usuario.Doador;
 import usuario.TipoDoador;
+import util.ArquivoUtil;
 
 public class SistemaCadastro {
 
+    private static String ARQUIVO_DADOS = "dadosCadastro.dat";
     private ArrayList<Doador> doadores;
     private Doador doadorLogado;
 
     public SistemaCadastro(){
-        this.doadores = new ArrayList<Doador>();
+        this.doadores = carregarDadosCadastro();
+        if(this.doadores == null)
+            this.doadores = new ArrayList<Doador>();
+        System.out.println("Dados salvos no cadastro:");
+        System.out.println(this.doadores);
     }
 
-    public void cadastrarDoador(String nome, String email, String identificador, String telefone, String senha, TipoDoador tipoDoador){
+    public void cadastrarDoador(String nome, String email, String identificador, String telefone, 
+                                String senha, TipoDoador tipoDoador, boolean administrador){
         System.out.println(String.format("Cadastro do doador %s feito com sucesso!", nome));
-        this.doadores.add(new Doador(nome, email, identificador, telefone, senha, tipoDoador));
+        Doador novoDoador = null;
+        if(administrador)
+            novoDoador = new Administrador(nome, email, identificador, telefone, senha, tipoDoador);
+        else
+            novoDoador = new Doador(nome, email, identificador, telefone, senha, tipoDoador);
+        this.doadores.add(novoDoador);
+        this.salvarDadosCadastro();
     }
 
     public void login(String email, String senha){
@@ -24,6 +41,7 @@ public class SistemaCadastro {
             if (doador.getEmail().equals(email) && doador.getSenha().equals(senha)){
                 System.out.println(String.format("Login do doador %s feito com sucesso!", doador.getNome()));
                 this.doadorLogado = doador;
+                return;
             }
         System.out.println("Dados incorretos! Não foi possível fazer login.");
     }
@@ -31,5 +49,27 @@ public class SistemaCadastro {
     public Doador doadorLogado(){
         return this.doadorLogado;
     }
-    
+
+    public void salvarDadosCadastro(){
+        ObjectOutputStream oos = ArquivoUtil.abrirArquivoParaEscrita(ARQUIVO_DADOS);
+        try {
+            oos.writeObject(this.doadores);
+            oos.close();
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar os dados de cadastro.");
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<Doador> carregarDadosCadastro(){
+        ArrayList<Doador> doadores = null;
+        try {
+            ObjectInputStream ois = ArquivoUtil.abrirArquivoParaLeitura(ARQUIVO_DADOS);
+            doadores = (ArrayList<Doador>) ois.readObject();
+        } catch (Exception e) {
+            System.out.println("Erro ao carregar os dados de cadastro, será inicializado um arraylist vazio.");
+        }
+        return doadores;
+    }
+
 }

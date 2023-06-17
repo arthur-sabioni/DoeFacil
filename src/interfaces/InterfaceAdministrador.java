@@ -25,7 +25,6 @@ public class InterfaceAdministrador extends InterfaceDoador {
     }
 
     public void aprovarItem(Item item){
-
     }
 
 }

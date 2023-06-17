@@ -42,6 +42,7 @@ public class InterfaceCadastro implements Interface{
     }
 
     public void realizarLogin(){
+        scanner.nextLine();
         System.out.print("Digite o email: ");
         String email = scanner.nextLine();
         System.out.print("Digite a senha: ");
@@ -50,14 +51,17 @@ public class InterfaceCadastro implements Interface{
     }
 
     public void realizarCadastro(){
+        Boolean administrador = null;
         TipoDoador tipoDoador = null;
-        while (tipoDoador == null){
-            System.out.print("Qual o tipo do doador? (1) Pessoa Física ou (2) Pessoa Jurídica? ");
+
+        while (administrador == null){
+            System.out.print("O doador a ser cadastrado é administrador? (1) Sim ou (2) Não? ");
             try {
                 int opcao = scanner.nextInt();
                 switch (opcao){
-                    case 1: tipoDoador = TipoDoador.PessoaFisica; break;
-                    case 2: tipoDoador = TipoDoador.PessoaJuridica; break;
+                    case 1: administrador = true; break;
+                    case 2: administrador = false; break;
+                    default: System.out.println("Por favor digite 1 ou 2!");
                 }
             }
             catch (Exception ex){
@@ -65,6 +69,23 @@ public class InterfaceCadastro implements Interface{
                 scanner.next();
             }
         }
+
+        while (tipoDoador == null){
+            System.out.print("Qual o tipo do doador? (1) Pessoa Física ou (2) Pessoa Jurídica? ");
+            try {
+                int opcao = scanner.nextInt();
+                switch (opcao){
+                    case 1: tipoDoador = TipoDoador.PessoaFisica; break;
+                    case 2: tipoDoador = TipoDoador.PessoaJuridica; break;
+                    default: System.out.println("Por favor digite 1 ou 2!");
+                }
+            }
+            catch (Exception ex){
+                System.out.println("Por favor digite 1 ou 2!");
+                scanner.next();
+            }
+        }
+        scanner.nextLine();
         System.out.print("Digite o nome: ");
         String nome = scanner.nextLine();
         System.out.print("Digite o email: ");
@@ -78,7 +99,7 @@ public class InterfaceCadastro implements Interface{
         String identificador = scanner.nextLine();
         System.out.print("Digite o telefone: ");
         String telefone = scanner.nextLine(); 
-        this.sistema.cadastrarDoador(nome, email, identificador, telefone, senha, tipoDoador);
+        this.sistema.cadastrarDoador(nome, email, identificador, telefone, senha, tipoDoador, administrador);
     }
 
     public Doador doadorLogado(){

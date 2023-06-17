@@ -7,13 +7,13 @@ import usuario.Doador;
 
 public class InterfaceDoador implements Interface {
 
-    private ItemBag itens;
-    private Mailer mailer;
-    private Doador user;
+    protected ItemBag itemBag;
+    protected Mailer mailer;
+    protected Doador user;
 
     public InterfaceDoador(Doador user) {
 
-        this.itens = new ItemBag();
+        this.itemBag = new ItemBag();
         this.mailer = new Mailer();
         this.user = user;
 

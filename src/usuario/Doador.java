@@ -1,6 +1,8 @@
 package usuario;
 
-public class Doador {
+import java.io.Serializable;
+
+public class Doador implements Serializable{
 
     private String nome;
     private String email;
@@ -64,6 +66,19 @@ public class Doador {
 
     public void setTipo(TipoDoador tipo) {
         this.tipo = tipo;
+    }
+
+
+    @Override
+    public String toString() {
+        return "{Doador: " +
+            " nome='" + getNome() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", identificador='" + getIdentificador() + "'" +
+            ", telefone='" + getTelefone() + "'" +
+            ", senha='" + getSenha() + "'" +
+            ", tipo='" + getTipo() + "'" +
+            "}";
     }
 
 }
