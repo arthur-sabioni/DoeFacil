@@ -3,7 +3,6 @@ package item;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +32,7 @@ public class ItemBag {
     }
 
     public void adicionarItem(String nome, TipoItem tipo, String descricao, String localizacao, Doador doador){
-        this.itens.put(proximoId, new Item(proximoId, nome, tipo, descricao, localizacao, doador));
+        this.itens.put(proximoId, new Item(doador, proximoId, tipo, nome,  descricao, localizacao));
         this.proximoId++;
         this.salvarDadosItens();
     }

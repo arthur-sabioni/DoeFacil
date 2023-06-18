@@ -16,14 +16,15 @@ public class Item implements Serializable{
     private Status status;
     private ArrayList<Interesse> interessados;
 
-    public Item(int id, String nome, TipoItem tipo, String descricao, String localizacao, Doador doador){
+    public Item(Doador doador, int id, TipoItem tipo, String nome, String descricao, String localizacao){
 
-        this.status = Status.pendente;
+        this.doador = doador;
         this.id = id;
-        this.nome = nome;
         this.tipo = tipo;
+        this.nome = nome;
         this.descricao = descricao;
         this.localizacao = localizacao;
+        this.status = Status.pendente;
         this.interessados = new ArrayList<>();
 
     }
