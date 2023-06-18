@@ -1,40 +1,34 @@
 package item;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import persistencia.PersistenciaItem;
 import usuario.Doador;
-import util.ArquivoUtil;
 
 public class ItemBag {
 
-    private static String ARQUIVO_DADOS = "dadosItens.dat";
     private int proximoId;
     private HashMap<Integer, Item> itens;
 
     public ItemBag(){
 
-        itens = carregarDadosItens();
+        itens = PersistenciaItem.carregarDadosItens();
         if(itens==null){
             proximoId = 0;
             itens = new HashMap<Integer, Item>();
         }
         else
             proximoId = itens.entrySet().stream().max(Comparator.comparing(Map.Entry::getKey)).get().getKey()+1;
-        System.out.println("Classe Item Bag inicializada com proximoId:" + proximoId + " e itens:");
-        System.out.println(itens);
     }
 
     public void adicionarItem(String nome, TipoItem tipo, String descricao, String localizacao, Doador doador){
-        this.itens.put(proximoId, new Item(doador, proximoId, tipo, nome,  descricao, localizacao));
-        this.proximoId++;
-        this.salvarDadosItens();
+        itens.put(proximoId, new Item(doador, proximoId, tipo, nome,  descricao, localizacao));
+        proximoId++;
+        PersistenciaItem.salvarDadosItens(itens);
     }
 
     public List<Item> itensPorDoador(Doador doador){
@@ -64,51 +58,28 @@ public class ItemBag {
     }
 
     public boolean atualizarItem(Item item){
-        if (this.itens.containsKey(item.getId())){
-            this.itens.put(item.getId(), item);
+        if (itens.containsKey(item.getId())){
+            itens.put(item.getId(), item);
             return true;
         }
         return false;
     }
 
     public void deletarItem(int id){
-        this.itens.get(id).setStatus(Status.deletado);
-        this.salvarDadosItens();
+        itens.get(id).setStatus(Status.deletado);
+        PersistenciaItem.salvarDadosItens(itens);
     }
 
     public boolean aprovarItem(Item item){
-        if (this.itens.containsKey(item.getId())){
-            this.itens.get(item.getId()).setStatus(Status.aprovado);
+        if (itens.containsKey(item.getId())){
+            itens.get(item.getId()).setStatus(Status.aprovado);
             return true;
         }
         return false;        
     }
 
     public int getProximoId(){
-        return this.proximoId;
-    }
-    
-    public void salvarDadosItens(){
-        ObjectOutputStream oos = ArquivoUtil.abrirArquivoParaEscrita(ARQUIVO_DADOS);
-        try {
-            oos.writeObject(this.itens);
-            oos.close();
-        } catch (IOException e) {
-            System.out.println("Erro ao salvar os dados de itens.");
-            e.printStackTrace();
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    public HashMap<Integer, Item> carregarDadosItens(){
-        HashMap<Integer, Item> itens = null;
-        try {
-            ObjectInputStream ois = ArquivoUtil.abrirArquivoParaLeitura(ARQUIVO_DADOS);
-            itens = (HashMap<Integer, Item>) ois.readObject();
-        } catch (Exception e) {
-            System.out.println("Erro ao carregar os dados de cadastro, será inicializado um novo conjunto de itens vazio.");
-        }
-        return itens;
+        return proximoId;
     }
 
 }

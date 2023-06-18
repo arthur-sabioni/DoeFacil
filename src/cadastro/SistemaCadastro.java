@@ -1,23 +1,19 @@
 package cadastro;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import persistencia.PersistenciaCadastro;
 import usuario.Administrador;
 import usuario.Doador;
 import usuario.TipoDoador;
-import util.ArquivoUtil;
 
 public class SistemaCadastro {
 
-    private static String ARQUIVO_DADOS = "dadosCadastro.dat";
     private ArrayList<Doador> doadores;
     private Doador doadorLogado;
 
     public SistemaCadastro(){
-        this.doadores = carregarDadosCadastro();
+        this.doadores = PersistenciaCadastro.carregarDadosCadastro();
         if(this.doadores == null)
             this.doadores = new ArrayList<Doador>();
     }
@@ -31,7 +27,7 @@ public class SistemaCadastro {
         else
             novoDoador = new Doador(nome, email, identificador, telefone, senha, tipoDoador);
         this.doadores.add(novoDoador);
-        this.salvarDadosCadastro();
+        PersistenciaCadastro.salvarDadosCadastro(this.doadores);
     }
 
     public void login(String email, String senha){
@@ -46,29 +42,6 @@ public class SistemaCadastro {
 
     public Doador doadorLogado(){
         return this.doadorLogado;
-    }
-
-    public void salvarDadosCadastro(){
-        ObjectOutputStream oos = ArquivoUtil.abrirArquivoParaEscrita(ARQUIVO_DADOS);
-        try {
-            oos.writeObject(this.doadores);
-            oos.close();
-        } catch (IOException e) {
-            System.out.println("Erro ao salvar os dados de cadastro.");
-            e.printStackTrace();
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    public ArrayList<Doador> carregarDadosCadastro(){
-        ArrayList<Doador> doadores = null;
-        try {
-            ObjectInputStream ois = ArquivoUtil.abrirArquivoParaLeitura(ARQUIVO_DADOS);
-            doadores = (ArrayList<Doador>) ois.readObject();
-        } catch (Exception e) {
-            System.out.println("Erro ao carregar os dados de cadastro, será inicializado um cadastro vazio.");
-        }
-        return doadores;
     }
 
 }
