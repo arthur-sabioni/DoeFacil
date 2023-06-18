@@ -1,20 +1,20 @@
 package item;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import usuario.Doador;
 
-public class Item {
+public class Item implements Serializable{
 
-    private Status status;
-    private int id;
-    private String nome;
-    private TipoItem tipo;
-    private String descricao;
-    private File foto;
-    private String localizacao;
     private Doador doador;
+    private int id;
+    private TipoItem tipo;
+    private String nome;
+    private String descricao;
+    private String localizacao;
+    private Status status;
     private ArrayList<Interesse> interessados;
 
     public Item(int id, String nome, TipoItem tipo, String descricao, File foto, String localizacao, Doador doador){
@@ -24,24 +24,9 @@ public class Item {
         this.nome = nome;
         this.tipo = tipo;
         this.descricao = descricao;
-        this.foto = foto;
         this.localizacao = localizacao;
         this.interessados = new ArrayList<>();
 
-    }
-
-    //  Caso nao tenha foto
-    public Item(int id, String nome, TipoItem tipo, String descricao, String localizacao, Doador doador){
-
-        this.status = Status.pendente;
-        this.id = id;
-        this.nome = nome;
-        this.tipo = tipo;
-        this.descricao = descricao;
-        this.foto = null;
-        this.localizacao = localizacao;
-        this.interessados = new ArrayList<Interesse>();
-        
     }
 
     public void deletar(){
@@ -96,14 +81,6 @@ public class Item {
         this.descricao = descricao;
     }
 
-    public File getFoto() {
-        return this.foto;
-    }
-
-    public void setFoto(File foto) {
-        this.foto = foto;
-    }
-
     public String getLocalizacao() {
         return this.localizacao;
     }
@@ -124,5 +101,31 @@ public class Item {
         return this.interessados;
     }
 
-    
+
+    @Override
+    public String toString() {
+        return "{Item: " +
+            " doador='" + getDoador() + "'" +
+            ", id='" + getId() + "'" +
+            ", tipo='" + getTipo() + "'" +
+            ", nome='" + getNome() + "'" +
+            ", descricao='" + getDescricao() + "'" +
+            ", localizacao='" + getLocalizacao() + "'" +
+            ", status='" + getStatus() + "'" +
+            ", interessados='" + getInteressados() + "'" +
+            "}";
+    }
+
+    public String toStringSemDoador() {
+        return "{Item: " +
+            " id='" + getId() + "'" +
+            ", tipo='" + getTipo() + "'" +
+            ", nome='" + getNome() + "'" +
+            ", descricao='" + getDescricao() + "'" +
+            ", localizacao='" + getLocalizacao() + "'" +
+            ", status='" + getStatus() + "'" +
+            ", interessados='" + getInteressados() + "'" +
+            "}";
+    }
+
 }
