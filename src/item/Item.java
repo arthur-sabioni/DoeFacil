@@ -1,6 +1,5 @@
 package item;
 
-import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -17,7 +16,7 @@ public class Item implements Serializable{
     private Status status;
     private ArrayList<Interesse> interessados;
 
-    public Item(int id, String nome, TipoItem tipo, String descricao, File foto, String localizacao, Doador doador){
+    public Item(int id, String nome, TipoItem tipo, String descricao, String localizacao, Doador doador){
 
         this.status = Status.pendente;
         this.id = id;
