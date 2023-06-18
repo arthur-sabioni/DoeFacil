@@ -1,6 +1,6 @@
 package item;
 
-public enum TipoItem {
+    public enum TipoItem {
     
     mobilha,
     vestuario,

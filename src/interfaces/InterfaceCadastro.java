@@ -32,6 +32,7 @@ public class InterfaceCadastro implements Interface{
                     case 1: realizarLogin(); break;
                     case 2: realizarCadastro(); break;
                     case 3: System.exit(0);
+                    default: System.out.println("Por favor digite um inteiro entre 1 e " + opcoes.length);
                 }
             }
             catch (Exception ex){

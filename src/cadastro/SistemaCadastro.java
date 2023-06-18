@@ -20,8 +20,6 @@ public class SistemaCadastro {
         this.doadores = carregarDadosCadastro();
         if(this.doadores == null)
             this.doadores = new ArrayList<Doador>();
-        System.out.println("Dados salvos no cadastro:");
-        System.out.println(this.doadores);
     }
 
     public void cadastrarDoador(String nome, String email, String identificador, String telefone, 
@@ -61,13 +59,14 @@ public class SistemaCadastro {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public ArrayList<Doador> carregarDadosCadastro(){
         ArrayList<Doador> doadores = null;
         try {
             ObjectInputStream ois = ArquivoUtil.abrirArquivoParaLeitura(ARQUIVO_DADOS);
             doadores = (ArrayList<Doador>) ois.readObject();
         } catch (Exception e) {
-            System.out.println("Erro ao carregar os dados de cadastro, será inicializado um arraylist vazio.");
+            System.out.println("Erro ao carregar os dados de cadastro, será inicializado um cadastro vazio.");
         }
         return doadores;
     }
