@@ -38,7 +38,7 @@ public class Item implements Serializable{
     }
 
     public boolean demonstrarInteresse(Doador user, String justificativa){
-        return this.interessados.add(new Interesse(user, justificativa));
+        return this.interessados.add(new Interesse(interessados.size(), user, justificativa));
     }
 
     public void doar(){
@@ -101,11 +101,16 @@ public class Item implements Serializable{
         return this.interessados;
     }
 
+    public void confirmarDoacao(int idInteresse){
+        this.status = Status.doado;
+        this.interessados.stream().filter(interesse -> interesse.getId()==idInteresse).findFirst().get().confirmarInteresse();
+    }
+
 
     @Override
     public String toString() {
         return "{Item: " +
-            " doador='" + getDoador() + "'" +
+            " doador='" + getDoador().getNome() + "'" +
             ", id='" + getId() + "'" +
             ", tipo='" + getTipo() + "'" +
             ", nome='" + getNome() + "'" +
@@ -116,16 +121,32 @@ public class Item implements Serializable{
             "}";
     }
 
-    public String toStringSemDoador() {
+    public String toStringDadosBasicos() {
         return "{Item: " +
             " id='" + getId() + "'" +
             ", tipo='" + getTipo() + "'" +
             ", nome='" + getNome() + "'" +
             ", descricao='" + getDescricao() + "'" +
             ", localizacao='" + getLocalizacao() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", interessados='" + getInteressados() + "'" +
             "}";
+    }
+
+    public String exibirInteresses() { 
+        if(interessados.isEmpty())
+            return "Não há interessados no Item " + 
+            "{id='" + getId() + "'" +
+            ", tipo='" + getTipo() + "'" +
+            ", nome='" + getNome() + "'}";
+
+        String stringInteressados = "";
+        for(Interesse interesse : interessados)
+            stringInteressados += "\t- " + interesse.toString();
+        
+        return "Interessados no Item " + 
+            "{id='" + getId() + "'" +
+            ", tipo='" + getTipo() + "'" +
+            ", nome='" + getNome() + "'}:\n" +
+            stringInteressados;
     }
 
 }

@@ -2,17 +2,16 @@ package interfaces;
 
 import java.util.Scanner;
 
-import item.Item;
 import usuario.Administrador;
 
 public class InterfaceAdministrador extends InterfaceDoador {
 
     private static String[] opcoes = {
         "--OPÇÕES DE DOADOR--\n1 - Pesquisar itens disponíveis para doação",
-        "2 - Cadastrar novo item para doação",
-        "3 - Deletar item cadastrado",
-        "4 - Demonstrar interesse em itens disponíveis para doação",
-        "5 - Aprovar doação de algum dos seus itens",
+        "2 - Demonstrar interesse em item disponível para doação",
+        "3 - Cadastrar novo item para doação",
+        "4 - Aprovar doação de algum dos seus itens",
+        "5 - Deletar item cadastrado",
         "--OPÇÕES DE ADMINISTRADOR--\n6 - Listar itens com status pendente",
         "7 - Aprovar item com status pendente",
         "8 - Reprovar item com status pendente",
@@ -35,12 +34,12 @@ public class InterfaceAdministrador extends InterfaceDoador {
                 int opcao = scanner.nextInt();
                 switch (opcao){
                     case 1: buscarItens(); break;
-                    case 2: cadastrarNovoItem(); break;
-                    case 3: deletarItem(); break;
-                    case 4: demonstrarInteresse(null); break;
-                    case 5: aprovarInteresses(); break;
+                    case 2: demonstrarInteresse(); break;
+                    case 3: cadastrarNovoItem(); break;
+                    case 4: aprovarInteresse(); break;
+                    case 5: deletarItem(); break;
                     case 6: listarItensPendentes(); break;
-                    case 7: aprovarItemPendente(null); break;
+                    case 7: aprovarItemPendente(); break;
                     case 8: reprovarItemPendente(); break;
                     case 9: System.exit(0); break;
                     default: System.out.println("Por favor digite um inteiro entre 1 e " + opcoes.length);
@@ -61,7 +60,7 @@ public class InterfaceAdministrador extends InterfaceDoador {
 
     }
 
-    public void aprovarItemPendente(Item item){
+    public void aprovarItemPendente(){
     }
 
 }
