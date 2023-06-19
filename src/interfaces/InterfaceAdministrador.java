@@ -36,7 +36,7 @@ public class InterfaceAdministrador extends InterfaceDoador {
                     case 1: buscarItens(); break;
                     case 2: demonstrarInteresse(); break;
                     case 3: cadastrarNovoItem(); break;
-                    case 4: aprovarInteresse(); break;
+                    case 4: aprovarDoacao(); break;
                     case 5: deletarItem(); break;
                     case 6: listarItensPendentes(); break;
                     case 7: aprovarItemPendente(); break;
@@ -53,7 +53,6 @@ public class InterfaceAdministrador extends InterfaceDoador {
     }
 
     public void listarItensPendentes(){
-
     }
 
     public void reprovarItemPendente(){
