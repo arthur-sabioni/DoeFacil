@@ -24,7 +24,8 @@ public class Item implements Serializable{
         this.nome = nome;
         this.descricao = descricao;
         this.localizacao = localizacao;
-        this.status = Status.pendente;
+        //TO-DO: VOLTAR PARA PENDENTE -> MUDANDO PARA APROVADO APENAS MOMENTANEAMNETE
+        this.status = Status.aprovado;
         this.interessados = new ArrayList<>();
 
     }
