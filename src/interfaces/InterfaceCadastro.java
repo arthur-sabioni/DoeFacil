@@ -58,7 +58,6 @@ public class InterfaceCadastro implements Interface{
         while (administrador == null){
             System.out.print("O doador a ser cadastrado é administrador? (1) Sim ou (2) Não? ");
             try {
-                scanner = new Scanner(System.in);
                 int opcao = scanner.nextInt();
                 switch (opcao){
                     case 1: administrador = true; break;
@@ -68,14 +67,13 @@ public class InterfaceCadastro implements Interface{
             }
             catch (Exception ex){
                 System.out.println("Por favor digite 1 ou 2!");
-                scanner.next();
             }
+            scanner.nextLine();
         }
 
         while (tipoDoador == null){
             System.out.print("Qual o tipo do doador? (1) Pessoa Física ou (2) Pessoa Jurídica? ");
             try {
-                scanner = new Scanner(System.in);
                 int opcao = scanner.nextInt();
                 switch (opcao){
                     case 1: tipoDoador = TipoDoador.PessoaFisica; break;
@@ -86,8 +84,8 @@ public class InterfaceCadastro implements Interface{
             catch (Exception ex){
                 System.out.println("Por favor digite 1 ou 2!");
             }
+            scanner.nextLine();
         }
-        scanner = new Scanner(System.in);
         System.out.print("Digite o nome: ");
         String nome = scanner.nextLine();
         System.out.print("Digite o email: ");

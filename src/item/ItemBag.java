@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import email.Mailer;
 import persistencia.PersistenciaItem;
+import usuario.Administrador;
 import usuario.Doador;
 
 public class ItemBag {
@@ -66,8 +67,7 @@ public class ItemBag {
     }
 
     public List<Item> itensDisponiveisDoDoador(Doador doador){
-        return itens.values().stream()
-        .filter(item -> item.getStatus().equals(Status.aprovado))
+        return itensDisponiveis().stream()
         .filter(item -> item.getDoador().equals(doador))
         .collect(Collectors.toList());
     }
@@ -93,7 +93,7 @@ public class ItemBag {
         PersistenciaItem.salvarDadosItens(itens);
     }
 
-    public void aprovarItem(int id, Doador adm){
+    public void aprovarItem(int id, Administrador adm){
         Item item = itens.get(id);
         item.setStatus(Status.aprovado);
         PersistenciaItem.salvarDadosItens(itens);
@@ -101,7 +101,7 @@ public class ItemBag {
         "e já está disponível para doadores visualizarem!", item.getNome(), adm.getNome()));
     }
 
-    public void rejeitarItem(int id, Doador adm, String justificativa){
+    public void rejeitarItem(int id, Administrador adm, String justificativa){
         Item item = itens.get(id);
         item.setStatus(Status.rejeitado);
         item.setJustificativaRejeicao(justificativa);

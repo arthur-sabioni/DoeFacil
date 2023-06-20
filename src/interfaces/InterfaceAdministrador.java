@@ -21,18 +21,16 @@ public class InterfaceAdministrador extends InterfaceDoador {
         "0 - Sair"
     };
 
-
     public InterfaceAdministrador(Administrador user){
         super(user);
-        this.user = user;
     }
 
     public void mostrarOpcoes(){
         while(true){
             Interface.printMenu(opcoes);
             try {
-                scanner = new Scanner(System.in);
                 int opcao = scanner.nextInt();
+                scanner.nextLine();
                 switch (opcao){
                     case 1: buscarItens(); break;
                     case 2: demonstrarInteresse(); break;
@@ -72,7 +70,7 @@ public class InterfaceAdministrador extends InterfaceDoador {
         System.out.println("Selecione um item para aprovar dentre a lista abaixo:");
         listarItensPendentes();
         int idItemSelecionado = selecionarItemEmLista(itens);
-        this.itemBag.aprovarItem(idItemSelecionado, user);
+        this.itemBag.aprovarItem(idItemSelecionado, (Administrador) user);
     }
 
     public void reprovarItemPendente(){
@@ -84,8 +82,7 @@ public class InterfaceAdministrador extends InterfaceDoador {
         listarItensPendentes();
         int idItemSelecionado = selecionarItemEmLista(itens);
         System.out.println("Informe a justificativa da rejeição: ");
-        scanner = new Scanner(System.in);
         String justificativa = scanner.nextLine();
-        this.itemBag.rejeitarItem(idItemSelecionado, user, justificativa);
+        this.itemBag.rejeitarItem(idItemSelecionado, (Administrador) user, justificativa);
     }
 }
