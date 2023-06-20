@@ -27,7 +27,7 @@ public class InterfaceCadastro implements Interface{
         while (sistema.doadorLogado()==null){
             Interface.printMenu(opcoes);
             try {
-                int opcao = scanner.nextInt();
+                int opcao = Integer.parseInt(scanner.nextLine());
                 switch (opcao){
                     case 1: realizarLogin(); break;
                     case 2: realizarCadastro(); break;
@@ -35,15 +35,13 @@ public class InterfaceCadastro implements Interface{
                     default: System.out.println("Por favor digite um inteiro entre 1 e " + opcoes.length);
                 }
             }
-            catch (Exception ex){
+            catch (NumberFormatException e){
                 System.out.println("Por favor digite um inteiro entre 1 e " + opcoes.length);
-                scanner.next();
             }
         }
     }
 
     public void realizarLogin(){
-        scanner.nextLine();
         System.out.print("Digite o email: ");
         String email = scanner.nextLine();
         System.out.print("Digite a senha: ");
@@ -58,33 +56,31 @@ public class InterfaceCadastro implements Interface{
         while (administrador == null){
             System.out.print("O doador a ser cadastrado é administrador? (1) Sim ou (2) Não? ");
             try {
-                int opcao = scanner.nextInt();
+                int opcao = Integer.parseInt(scanner.nextLine());
                 switch (opcao){
                     case 1: administrador = true; break;
                     case 2: administrador = false; break;
                     default: System.out.println("Por favor digite 1 ou 2!");
                 }
             }
-            catch (Exception ex){
+            catch (NumberFormatException e){
                 System.out.println("Por favor digite 1 ou 2!");
             }
-            scanner.nextLine();
         }
 
         while (tipoDoador == null){
             System.out.print("Qual o tipo do doador? (1) Pessoa Física ou (2) Pessoa Jurídica? ");
             try {
-                int opcao = scanner.nextInt();
+                int opcao = Integer.parseInt(scanner.nextLine());
                 switch (opcao){
                     case 1: tipoDoador = TipoDoador.PessoaFisica; break;
                     case 2: tipoDoador = TipoDoador.PessoaJuridica; break;
                     default: System.out.println("Por favor digite 1 ou 2!");
                 }
             }
-            catch (Exception ex){
+            catch (NumberFormatException e){
                 System.out.println("Por favor digite 1 ou 2!");
             }
-            scanner.nextLine();
         }
         System.out.print("Digite o nome: ");
         String nome = scanner.nextLine();

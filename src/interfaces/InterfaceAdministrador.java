@@ -29,8 +29,7 @@ public class InterfaceAdministrador extends InterfaceDoador {
         while(true){
             Interface.printMenu(opcoes);
             try {
-                int opcao = scanner.nextInt();
-                scanner.nextLine();
+                int opcao = Integer.parseInt(scanner.nextLine());
                 switch (opcao){
                     case 1: buscarItens(); break;
                     case 2: demonstrarInteresse(); break;
@@ -45,7 +44,7 @@ public class InterfaceAdministrador extends InterfaceDoador {
                     default: System.out.println("Por favor digite um inteiro entre 0 e 9!");
                 }
             }
-            catch (Exception ex){
+            catch (NumberFormatException e){
                 System.out.println("Por favor digite um inteiro entre 0 e 9!");
             }        
         }

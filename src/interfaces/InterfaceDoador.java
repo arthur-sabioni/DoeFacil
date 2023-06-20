@@ -38,7 +38,7 @@ public class InterfaceDoador implements Interface {
         while(true){
             Interface.printMenu(opcoes);
             try {
-                int opcao = scanner.nextInt();
+                int opcao = Integer.parseInt(scanner.nextLine());
                 switch (opcao){
                     case 1: buscarItens(); break;
                     case 2: demonstrarInteresse(); break;
@@ -50,10 +50,9 @@ public class InterfaceDoador implements Interface {
                     default: System.out.println("Por favor digite um inteiro entre 1 e " + opcoes.length);
                 }
             }
-            catch (Exception ex){
+            catch (NumberFormatException e){
                 System.out.println("Por favor digite um inteiro entre 1 e " + opcoes.length);
             }
-            scanner.nextLine();
         }
     }
 
@@ -67,17 +66,16 @@ public class InterfaceDoador implements Interface {
         while(true){
             try{
                 System.out.print("\nDigite o id do item que você quer selecionar: ");
-                int id = scanner.nextInt();
+                int id = Integer.parseInt(scanner.nextLine());
                 if(itemIds.contains(id)){
                     scanner.close();
                     return id;
                 }
                 System.out.println("Por favor digite um id válido de um dos itens da lista!");
             }
-            catch (Exception ex){       
+            catch (NumberFormatException e){       
                 System.out.println("Por favor digite um número inteiro!");
             }
-            scanner.nextLine();
         }      
     }
 
@@ -105,6 +103,7 @@ public class InterfaceDoador implements Interface {
         System.out.print("Digite a justificativa do seu interesse: ");
         String justificativa = scanner.nextLine();
         this.itemBag.cadastrarInteresse(idItemSelecionado, user, justificativa);
+        System.out.println(String.format("O seu interesse no item de id={} foi registrado com sucesso!", idItemSelecionado));
     }    
 
     public void cadastrarNovoItem(){
@@ -118,7 +117,7 @@ public class InterfaceDoador implements Interface {
                             + "6 - Eletrônico\n");
             try {
                 System.out.println("Digite o tipo do item: ");
-                int opcao = scanner.nextInt();
+                int opcao = Integer.parseInt(scanner.nextLine());
                 switch (opcao){
                     case 1: tipoItem = TipoItem.mobilha; break;
                     case 2: tipoItem = TipoItem.vestuario; break;
@@ -129,10 +128,9 @@ public class InterfaceDoador implements Interface {
                     default: System.out.println("Por favor digite um número entre 1 e 6!");
                 }
             }
-            catch (Exception ex){
+            catch (NumberFormatException e){
                 System.out.println("Por favor digite um número entre 1 e 6!");
             }
-            scanner.nextLine();
         }
         System.out.print("Digite o nome do item: ");
         String nome = scanner.nextLine();
@@ -141,6 +139,7 @@ public class InterfaceDoador implements Interface {
         System.out.print("Digite a localização: ");
         String localizacao = scanner.nextLine();
         this.itemBag.adicionarItem(nome, tipoItem, descricao, localizacao, this.user);
+        System.out.println(String.format("Novo item {} cadastrado com sucesso!", nome));
     }
 
     public void visualizarInteressados(){
@@ -174,17 +173,18 @@ public class InterfaceDoador implements Interface {
         while(true){
             try{
                 System.out.print("\nDigite o id do interesse para o qual o item será doado: ");
-                int idInteresse = scanner.nextInt();
+                int idInteresse = Integer.parseInt(scanner.nextLine());
                 if(idsInteresses.contains(idInteresse)){
                     itemBag.confirmarDoacao(idItemSelecionado, idInteresse);
+                    System.out.println(String.format("Item de id={} será doado para o interessado com id de interesse={}!", 
+                                                    idItemSelecionado, idInteresse));
                     return;
                 }
                 System.out.println("Por favor digite um id válido de um dos interesses para o item selecionado!");
             }
-            catch (Exception ex){       
+            catch (NumberFormatException e){       
                 System.out.println("Por favor digite um número inteiro!");
             }
-            scanner.nextLine();
         }
     }
 
@@ -198,5 +198,6 @@ public class InterfaceDoador implements Interface {
         exibirItens(itens);
         int idItemSelecionado = selecionarItemEmLista(itens);
         this.itemBag.deletarItem(idItemSelecionado);
+        System.out.println(String.format("Item de id={} deletado com sucesso!", idItemSelecionado));
     }
 }
