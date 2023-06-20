@@ -1,6 +1,7 @@
 package interfaces;
 
 import java.util.List;
+import java.util.Scanner;
 
 import item.Item;
 import usuario.Administrador;
@@ -30,7 +31,7 @@ public class InterfaceAdministrador extends InterfaceDoador {
         while(true){
             Interface.printMenu(opcoes);
             try {
-                scanner.reset();
+                scanner = new Scanner(System.in);
                 int opcao = scanner.nextInt();
                 switch (opcao){
                     case 1: buscarItens(); break;
@@ -83,7 +84,7 @@ public class InterfaceAdministrador extends InterfaceDoador {
         listarItensPendentes();
         int idItemSelecionado = selecionarItemEmLista(itens);
         System.out.println("Informe a justificativa da rejeição: ");
-        scanner.reset();
+        scanner = new Scanner(System.in);
         String justificativa = scanner.nextLine();
         this.itemBag.rejeitarItem(idItemSelecionado, user, justificativa);
     }

@@ -1,12 +1,9 @@
 package interfaces;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import email.Mailer;
 import item.Interesse;
 import item.Item;
 import item.ItemBag;
@@ -41,7 +38,7 @@ public class InterfaceDoador implements Interface {
         while(true){
             Interface.printMenu(opcoes);
             try {
-                scanner.reset();
+                scanner = new Scanner(System.in);
                 int opcao = scanner.nextInt();
                 switch (opcao){
                     case 1: buscarItens(); break;
@@ -70,7 +67,7 @@ public class InterfaceDoador implements Interface {
         while(true){
             try{
                 System.out.print("\nDigite o id do item que você quer selecionar: ");
-                scanner.reset();
+                scanner = new Scanner(System.in);
                 int id = scanner.nextInt();
                 if(itemIds.contains(id)){
                     scanner.close();
@@ -86,7 +83,7 @@ public class InterfaceDoador implements Interface {
 
     public void buscarItens(){
         System.out.print("Digite o texto da pesquisa (deixe em branco para buscar todos os itens): ");
-        scanner.reset();
+        scanner = new Scanner(System.in);
         String pesquisa = scanner.nextLine();
         List<Item> resultado = itemBag.buscarItem(pesquisa);
         if(resultado.isEmpty()){
@@ -107,7 +104,7 @@ public class InterfaceDoador implements Interface {
         exibirItens(itensDisponiveis);
         int idItemSelecionado = selecionarItemEmLista(itensDisponiveis);
         System.out.print("Digite a justificativa do seu interesse: ");
-        scanner.reset();
+        scanner = new Scanner(System.in);
         String justificativa = scanner.nextLine();
         this.itemBag.cadastrarInteresse(idItemSelecionado, user, justificativa);
     }    
@@ -123,7 +120,7 @@ public class InterfaceDoador implements Interface {
                             + "6 - Eletrônico\n");
             try {
                 System.out.println("Digite o tipo do item: ");
-                scanner.reset();
+                scanner = new Scanner(System.in);
                 int opcao = scanner.nextInt();
                 switch (opcao){
                     case 1: tipoItem = TipoItem.mobilha; break;
@@ -139,7 +136,7 @@ public class InterfaceDoador implements Interface {
                 System.out.println("Por favor digite um número entre 1 e 6!");
             }
         }
-        scanner.reset();
+        scanner = new Scanner(System.in);
         System.out.print("Digite o nome do item: ");
         String nome = scanner.nextLine();
         System.out.print("Digite a descrição: ");
@@ -179,7 +176,7 @@ public class InterfaceDoador implements Interface {
         while(true){
             try{
                 System.out.print("\nDigite o id do interesse para o qual o item será doado: ");
-                scanner.reset();
+                scanner = new Scanner(System.in);
                 int idInteresse = scanner.nextInt();
                 if(idsInteresses.contains(idInteresse)){
                     itemBag.confirmarDoacao(idItemSelecionado, idInteresse);
