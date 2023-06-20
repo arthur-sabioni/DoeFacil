@@ -56,7 +56,7 @@ public class ItemBag {
     public List<Item> itensDoDoador(Doador doador){
         return itens.values().stream()
         .filter(item -> !item.getStatus().equals(Status.deletado))
-        .filter(item -> item.getDoador().equals(doador))
+        .filter(item -> item.getDoador().getIdentificador().equals(doador.getIdentificador()))
         .collect(Collectors.toList());
     }
 
@@ -68,7 +68,7 @@ public class ItemBag {
 
     public List<Item> itensDisponiveisDoDoador(Doador doador){
         return itensDisponiveis().stream()
-        .filter(item -> item.getDoador().equals(doador))
+        .filter(item -> item.getDoador().getIdentificador().equals(doador.getIdentificador()))
         .collect(Collectors.toList());
     }
 
@@ -109,6 +109,5 @@ public class ItemBag {
         mailer.enviarEmail(adm.getEmail(), item.getDoador().getEmail(), String.format("Infelizmente, o seu item {} foi reprovado pelo " +
         "administrador {}. Segue abaixo a justificativa da rejeição:\n", item.getNome(), adm.getNome(), justificativa));        
     }
-
 
 }

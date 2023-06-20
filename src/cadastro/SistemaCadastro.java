@@ -18,8 +18,18 @@ public class SistemaCadastro {
             this.doadores = new ArrayList<Doador>();
     }
 
+    public boolean dadoUnicoJaExistente(String email, String identificador){
+        return doadores.stream().anyMatch(doador -> (doador.getEmail().equals(email) || doador.getIdentificador().equals(identificador)));
+    }
+
     public void cadastrarDoador(String nome, String email, String identificador, String telefone, 
                                 String senha, TipoDoador tipoDoador, boolean administrador){
+
+        if(dadoUnicoJaExistente(email, identificador)){
+            System.out.println("Existem doadores já cadastrados com os dados informados!");
+            return;
+        }
+
         Doador novoDoador = null;
         if(administrador)
             novoDoador = new Administrador(nome, email, identificador, telefone, senha, tipoDoador);
