@@ -20,13 +20,13 @@ public class SistemaCadastro {
 
     public void cadastrarDoador(String nome, String email, String identificador, String telefone, 
                                 String senha, TipoDoador tipoDoador, boolean administrador){
-        System.out.println(String.format("Cadastro do doador %s feito com sucesso!", nome));
         Doador novoDoador = null;
         if(administrador)
             novoDoador = new Administrador(nome, email, identificador, telefone, senha, tipoDoador);
         else
             novoDoador = new Doador(nome, email, identificador, telefone, senha, tipoDoador);
         this.doadores.add(novoDoador);
+        System.out.println(String.format("Cadastro do doador %s feito com sucesso!", nome));
         PersistenciaCadastro.salvarDadosCadastro(this.doadores);
     }
 

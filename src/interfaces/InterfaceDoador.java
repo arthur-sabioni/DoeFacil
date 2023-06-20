@@ -26,15 +26,13 @@ public class InterfaceDoador implements Interface {
     };
 
     protected ItemBag itemBag;
-    protected Mailer mailer;
     protected Doador user;
-    private Scanner scanner;
+    protected Scanner scanner;
 
     public InterfaceDoador(Doador user) {
 
         this.scanner = new Scanner(System.in);
         this.itemBag = new ItemBag();
-        this.mailer = new Mailer();
         this.user = user;
 
     }
@@ -166,8 +164,7 @@ public class InterfaceDoador implements Interface {
         System.out.println("Selecione um item para aprovar a doação dentre a lista abaixo:");
         int idItemSelecionado = selecionarItemEmLista(itens);
         Item itemASerDoado = itemBag.buscarItemPorId(idItemSelecionado);
-        Map<Integer, Interesse> interessados = itemASerDoado.getInteressados().stream().collect(Collectors.toMap(Interesse::getId, Function.identity()));
-        List<Integer> idsInteresses = interessados.keySet().stream().collect(Collectors.toList());
+        List<Integer> idsInteresses = itemASerDoado.getInteressados().stream().map(Interesse::getId).collect(Collectors.toList());
 
         if(idsInteresses.isEmpty()){
             System.out.println("O item selecionado não possui nenhum interessado para receber a doação!");
@@ -180,10 +177,7 @@ public class InterfaceDoador implements Interface {
                 scanner.reset();
                 int idInteresse = scanner.nextInt();
                 if(idsInteresses.contains(idInteresse)){
-                    Interesse interesse = interessados.get(idInteresse);
-                    itemBag.aprovarInteresse(idItemSelecionado, idInteresse);
-                    this.mailer.enviarEmail(user.getEmail(), interesse.getInteressado().getEmail(), "O seu interesse para o item " + 
-                                            itemASerDoado.getNome() + " foi confirmado e você irá receber a doação!");
+                    itemBag.confirmarDoacao(idItemSelecionado, idInteresse);
                     return;
                 }
                 System.out.println("Por favor digite um id válido de um dos interesses para o item selecionado!");

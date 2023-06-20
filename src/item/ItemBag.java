@@ -6,16 +6,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import email.Mailer;
 import persistencia.PersistenciaItem;
 import usuario.Doador;
 
 public class ItemBag {
 
+    private Mailer mailer;
     private int proximoId;
     private HashMap<Integer, Item> itens;
 
     public ItemBag(){
 
+        this.mailer = new Mailer();
         itens = PersistenciaItem.carregarDadosItens();
         if(itens==null){
             proximoId = 0;
@@ -38,6 +41,15 @@ public class ItemBag {
     public void cadastrarInteresse(int id, Doador interessado, String justificativa){
         this.itens.get(id).demonstrarInteresse(interessado, justificativa);
         PersistenciaItem.salvarDadosItens(itens);
+    }
+
+    public void confirmarDoacao(int idItem, int idInteresse){
+        Item item = itens.get(idItem);
+        Interesse interesse = item.getInteressados().stream().filter(i -> i.getId()==idInteresse).findFirst().get();
+        item.setStatus(Status.doado);
+        item.setDonatario(interesse.getInteressado());
+        this.mailer.enviarEmail(item.getDoador().getEmail(), interesse.getInteressado().getEmail(), "O seu interesse para o item " + 
+                                item.getNome() + " foi confirmado e você irá receber a doação!");
     }
 
     public List<Item> itensDoDoador(Doador doador){
@@ -74,11 +86,6 @@ public class ItemBag {
         return itens.values().stream()
         .filter(item -> item.getStatus().equals(Status.pendente))
         .collect(Collectors.toList());
-    }
-
-    public void aprovarInteresse(int idItem, int idInteresse){
-        itens.get(idItem).confirmarDoacao(idInteresse);
-        PersistenciaItem.salvarDadosItens(itens);
     }
 
     public void deletarItem(int id){

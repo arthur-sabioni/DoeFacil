@@ -15,6 +15,7 @@ public class Item implements Serializable{
     private String localizacao;
     private Status status;
     private ArrayList<Interesse> interessados;
+    private Doador donatario;
 
     public Item(Doador doador, int id, TipoItem tipo, String nome, String descricao, String localizacao){
 
@@ -27,7 +28,7 @@ public class Item implements Serializable{
         //TO-DO: VOLTAR PARA PENDENTE -> MUDANDO PARA APROVADO APENAS MOMENTANEAMNETE
         this.status = Status.aprovado;
         this.interessados = new ArrayList<>();
-
+        this.donatario = null;
     }
 
     public void deletar(){
@@ -38,8 +39,8 @@ public class Item implements Serializable{
         System.out.println(this.toString());
     }
 
-    public boolean demonstrarInteresse(Doador user, String justificativa){
-        return this.interessados.add(new Interesse(interessados.size(), user, justificativa));
+    public void demonstrarInteresse(Doador user, String justificativa){
+        this.interessados.add(new Interesse(interessados.size(), user, justificativa));
     }
 
     public void doar(){
@@ -102,11 +103,13 @@ public class Item implements Serializable{
         return this.interessados;
     }
 
-    public void confirmarDoacao(int idInteresse){
-        this.status = Status.doado;
-        this.interessados.stream().filter(interesse -> interesse.getId()==idInteresse).findFirst().get().confirmarInteresse();
+    public Doador getDonatario() {
+        return this.donatario;
     }
 
+    public void setDonatario(Doador donatario) {
+        this.donatario = donatario;
+    }
 
     @Override
     public String toString() {
@@ -119,8 +122,10 @@ public class Item implements Serializable{
             ", localizacao='" + getLocalizacao() + "'" +
             ", status='" + getStatus() + "'" +
             ", interessados='" + getInteressados() + "'" +
+            ", donatario='" + getDonatario() + "'" +
             "}";
-    }
+
+        }
 
     public String toStringDadosBasicos() {
         return "{Item: " +
