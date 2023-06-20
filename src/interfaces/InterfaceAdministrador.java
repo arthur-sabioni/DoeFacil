@@ -1,7 +1,8 @@
 package interfaces;
 
-import java.util.Scanner;
+import java.util.List;
 
+import item.Item;
 import usuario.Administrador;
 
 public class InterfaceAdministrador extends InterfaceDoador {
@@ -52,13 +53,38 @@ public class InterfaceAdministrador extends InterfaceDoador {
     }
 
     public void listarItensPendentes(){
-    }
-
-    public void reprovarItemPendente(){
-
+        List<Item> itens = itemBag.buscaPendentes();
+        if(itens.isEmpty()){
+            System.out.println("Não há itens pendentes no sistema!");
+            return;
+        }
+        System.out.println("Lista de itens pendentes:");
+        for(Item item : itens)
+            System.out.println(item.toStringDadosBasicosComDoador());   
     }
 
     public void aprovarItemPendente(){
+        List<Item> itens = this.itemBag.buscaPendentes();
+        if(itens.isEmpty()){
+            return;
+        }
+        System.out.println("Selecione um item para aprovar dentre a lista abaixo:");
+        listarItensPendentes();
+        int idItemSelecionado = selecionarItemEmLista(itens);
+        this.itemBag.aprovarItem(idItemSelecionado, user);
     }
 
+    public void reprovarItemPendente(){
+        List<Item> itens = this.itemBag.buscaPendentes();
+        if(itens.isEmpty()){
+            return;
+        }
+        System.out.println("Selecione um item para reprovar dentre a lista abaixo:");
+        listarItensPendentes();
+        int idItemSelecionado = selecionarItemEmLista(itens);
+        System.out.println("Informe a justificativa da rejeição: ");
+        scanner.reset();
+        String justificativa = scanner.nextLine();
+        this.itemBag.rejeitarItem(idItemSelecionado, user, justificativa);
+    }
 }

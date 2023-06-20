@@ -68,7 +68,6 @@ public class Doador implements Serializable{
         this.tipo = tipo;
     }
 
-
     @Override
     public String toString() {
         return "{Doador: " +
@@ -76,7 +75,6 @@ public class Doador implements Serializable{
             ", email='" + getEmail() + "'" +
             ", identificador='" + getIdentificador() + "'" +
             ", telefone='" + getTelefone() + "'" +
-            ", senha='" + getSenha() + "'" +
             ", tipo='" + getTipo() + "'" +
             "}";
     }

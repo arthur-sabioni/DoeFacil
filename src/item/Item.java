@@ -14,6 +14,7 @@ public class Item implements Serializable{
     private String descricao;
     private String localizacao;
     private Status status;
+    private String justificativaRejeicao;
     private ArrayList<Interesse> interessados;
     private Doador donatario;
 
@@ -25,8 +26,8 @@ public class Item implements Serializable{
         this.nome = nome;
         this.descricao = descricao;
         this.localizacao = localizacao;
-        //TO-DO: VOLTAR PARA PENDENTE -> MUDANDO PARA APROVADO APENAS MOMENTANEAMNETE
-        this.status = Status.aprovado;
+        this.status = Status.pendente;
+        this.justificativaRejeicao = null;
         this.interessados = new ArrayList<>();
         this.donatario = null;
     }
@@ -53,6 +54,14 @@ public class Item implements Serializable{
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public String getJustificativaRejeicao() {
+        return this.justificativaRejeicao;
+    }
+
+    public void setJustificativaRejeicao(String justificativaRejeicao) {
+        this.justificativaRejeicao = justificativaRejeicao;
     }
 
     public int getId() {
@@ -121,14 +130,25 @@ public class Item implements Serializable{
             ", descricao='" + getDescricao() + "'" +
             ", localizacao='" + getLocalizacao() + "'" +
             ", status='" + getStatus() + "'" +
+            ", justificativaRejeicao='" + getJustificativaRejeicao() + "'" +
             ", interessados='" + getInteressados() + "'" +
             ", donatario='" + getDonatario() + "'" +
             "}";
-
-        }
+    }
 
     public String toStringDadosBasicos() {
         return "{Item: " +
+            " id='" + getId() + "'" +
+            ", tipo='" + getTipo() + "'" +
+            ", nome='" + getNome() + "'" +
+            ", descricao='" + getDescricao() + "'" +
+            ", localizacao='" + getLocalizacao() + "'" +
+            "}";
+    }
+
+    public String toStringDadosBasicosComDoador() {
+        return "{Item: " +
+            " doador='" + getDoador() + "'" +
             " id='" + getId() + "'" +
             ", tipo='" + getTipo() + "'" +
             ", nome='" + getNome() + "'" +

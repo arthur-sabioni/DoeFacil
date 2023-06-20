@@ -60,6 +60,11 @@ public class InterfaceDoador implements Interface {
         }
     }
 
+    public void exibirItens(List<Item> itens){
+        for(Item item : itens)
+            System.out.println(item.toStringDadosBasicos());
+    }
+
     public int selecionarItemEmLista(List<Item> itens){
         List<Integer> itemIds = itens.stream().map(Item::getId).collect(Collectors.toList());
         while(true){
@@ -89,8 +94,7 @@ public class InterfaceDoador implements Interface {
             return;
         }
         System.out.println("Resultados da pesquisa:");
-        for(Item item : resultado)
-            System.out.println(item.toStringDadosBasicos());        
+        exibirItens(resultado);     
     }    
 
     public void demonstrarInteresse(){
@@ -100,6 +104,7 @@ public class InterfaceDoador implements Interface {
             return;
         }
         System.out.println("Selecione um item disponível para doação dentre a lista abaixo:");
+        exibirItens(itensDisponiveis);
         int idItemSelecionado = selecionarItemEmLista(itensDisponiveis);
         System.out.print("Digite a justificativa do seu interesse: ");
         scanner.reset();
@@ -155,13 +160,13 @@ public class InterfaceDoador implements Interface {
     }
 
     public void aprovarDoacao(){
-        visualizarInteressados();
         List<Item> itens = this.itemBag.itensDisponiveisDoDoador(user);
         
         if(itens.isEmpty())
             return;
 
         System.out.println("Selecione um item para aprovar a doação dentre a lista abaixo:");
+        visualizarInteressados();
         int idItemSelecionado = selecionarItemEmLista(itens);
         Item itemASerDoado = itemBag.buscarItemPorId(idItemSelecionado);
         List<Integer> idsInteresses = itemASerDoado.getInteressados().stream().map(Interesse::getId).collect(Collectors.toList());
@@ -195,6 +200,7 @@ public class InterfaceDoador implements Interface {
             return;
         }
         System.out.println("Selecione um item para deleter dentre a lista abaixo:");
+        exibirItens(itens);
         int idItemSelecionado = selecionarItemEmLista(itens);
         this.itemBag.deletarItem(idItemSelecionado);
     }

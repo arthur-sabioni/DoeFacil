@@ -93,12 +93,21 @@ public class ItemBag {
         PersistenciaItem.salvarDadosItens(itens);
     }
 
-    public boolean aprovarItem(Item item){
-        if (itens.containsKey(item.getId())){
-            itens.get(item.getId()).setStatus(Status.aprovado);
-            return true;
-        }
-        return false;        
+    public void aprovarItem(int id, Doador adm){
+        Item item = itens.get(id);
+        item.setStatus(Status.aprovado);
+        PersistenciaItem.salvarDadosItens(itens);
+        mailer.enviarEmail(adm.getEmail(), item.getDoador().getEmail(), String.format("O seu item {} foi aprovado pelo administrador {} " +
+        "e já está disponível para doadores visualizarem!", item.getNome(), adm.getNome()));
+    }
+
+    public void rejeitarItem(int id, Doador adm, String justificativa){
+        Item item = itens.get(id);
+        item.setStatus(Status.rejeitado);
+        item.setJustificativaRejeicao(justificativa);
+        PersistenciaItem.salvarDadosItens(itens);
+        mailer.enviarEmail(adm.getEmail(), item.getDoador().getEmail(), String.format("Infelizmente, o seu item {} foi reprovado pelo " +
+        "administrador {}. Segue abaixo a justificativa da rejeição:\n", item.getNome(), adm.getNome(), justificativa));        
     }
 
 
