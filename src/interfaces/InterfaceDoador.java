@@ -68,7 +68,6 @@ public class InterfaceDoador implements Interface {
                 System.out.print("\nDigite o id do item que você quer selecionar: ");
                 int id = Integer.parseInt(scanner.nextLine());
                 if(itemIds.contains(id)){
-                    scanner.close();
                     return id;
                 }
                 System.out.println("Por favor digite um id válido de um dos itens da lista!");
