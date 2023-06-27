@@ -1,8 +1,10 @@
 package item;
 
+import java.io.Serializable;
+
 import usuario.Doador;
 
-public class Interesse {
+public class Interesse implements Serializable{
     
     private int id;
     private Doador interessado;
