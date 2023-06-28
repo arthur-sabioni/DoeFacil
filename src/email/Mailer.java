@@ -8,6 +8,6 @@ public class Mailer {
 
     public void enviarEmail(String remetente, String destinatario, String conteudo){
         System.out.println("Email enviado do remetente {" + remetente + "} para o destinatário {" + destinatario + "} " +
-        "com o conteúdo: {" + conteudo + "}");
+        "com o conteúdo: \n{\n" + conteudo + "\n}\n");
     }
 }
