@@ -107,7 +107,7 @@ public class ItemBag {
         item.setJustificativaRejeicao(justificativa);
         PersistenciaItem.salvarDadosItens(itens);
         mailer.enviarEmail(adm.getEmail(), item.getDoador().getEmail(), String.format("Infelizmente, o seu item '%s' foi reprovado pelo " +
-        "administrador '%s'. Segue abaixo a justificativa da rejeição:\n", item.getNome(), adm.getNome(), justificativa));        
+        "administrador '%s'. Segue abaixo a justificativa da rejeição:\n%s\n", item.getNome(), adm.getNome(), justificativa));        
     }
 
 }
