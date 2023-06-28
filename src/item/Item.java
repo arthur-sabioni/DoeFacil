@@ -166,7 +166,7 @@ public class Item implements Serializable{
 
         String stringInteressados = "";
         for(Interesse interesse : interessados)
-            stringInteressados += "\t- " + interesse.toString();
+            stringInteressados += "\t- " + interesse.toString() + "\n";
         
         return "Interessados no Item " + 
             "{id='" + getId() + "'" +
