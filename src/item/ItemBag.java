@@ -97,7 +97,7 @@ public class ItemBag {
         Item item = itens.get(id);
         item.setStatus(Status.aprovado);
         PersistenciaItem.salvarDadosItens(itens);
-        mailer.enviarEmail(adm.getEmail(), item.getDoador().getEmail(), String.format("O seu item {} foi aprovado pelo administrador {} " +
+        mailer.enviarEmail(adm.getEmail(), item.getDoador().getEmail(), String.format("O seu item '%s' foi aprovado pelo administrador '%s' " +
         "e já está disponível para doadores visualizarem!", item.getNome(), adm.getNome()));
     }
 
@@ -106,8 +106,8 @@ public class ItemBag {
         item.setStatus(Status.rejeitado);
         item.setJustificativaRejeicao(justificativa);
         PersistenciaItem.salvarDadosItens(itens);
-        mailer.enviarEmail(adm.getEmail(), item.getDoador().getEmail(), String.format("Infelizmente, o seu item {} foi reprovado pelo " +
-        "administrador {}. Segue abaixo a justificativa da rejeição:\n", item.getNome(), adm.getNome(), justificativa));        
+        mailer.enviarEmail(adm.getEmail(), item.getDoador().getEmail(), String.format("Infelizmente, o seu item '%s' foi reprovado pelo " +
+        "administrador '%s'. Segue abaixo a justificativa da rejeição:\n", item.getNome(), adm.getNome(), justificativa));        
     }
 
 }

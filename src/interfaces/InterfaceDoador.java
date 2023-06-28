@@ -102,7 +102,7 @@ public class InterfaceDoador implements Interface {
         System.out.print("Digite a justificativa do seu interesse: ");
         String justificativa = scanner.nextLine();
         this.itemBag.cadastrarInteresse(idItemSelecionado, user, justificativa);
-        System.out.println(String.format("O seu interesse no item de id={} foi registrado com sucesso!", idItemSelecionado));
+        System.out.println(String.format("O seu interesse no item de id={%d} foi registrado com sucesso!", idItemSelecionado));
     }    
 
     public void cadastrarNovoItem(){
@@ -138,7 +138,7 @@ public class InterfaceDoador implements Interface {
         System.out.print("Digite a localização: ");
         String localizacao = scanner.nextLine();
         this.itemBag.adicionarItem(nome, tipoItem, descricao, localizacao, this.user);
-        System.out.println(String.format("Novo item {} cadastrado com sucesso!", nome));
+        System.out.println(String.format("Novo item '%s' cadastrado com sucesso!", nome));
     }
 
     public void visualizarInteressados(){
@@ -175,7 +175,7 @@ public class InterfaceDoador implements Interface {
                 int idInteresse = Integer.parseInt(scanner.nextLine());
                 if(idsInteresses.contains(idInteresse)){
                     itemBag.confirmarDoacao(idItemSelecionado, idInteresse);
-                    System.out.println(String.format("Item de id={} será doado para o interessado com id de interesse={}!", 
+                    System.out.println(String.format("Item de id={%d} será doado para o interessado com id de interesse={%d}!", 
                                                     idItemSelecionado, idInteresse));
                     return;
                 }
@@ -197,6 +197,6 @@ public class InterfaceDoador implements Interface {
         exibirItens(itens);
         int idItemSelecionado = selecionarItemEmLista(itens);
         this.itemBag.deletarItem(idItemSelecionado);
-        System.out.println(String.format("Item de id={} deletado com sucesso!", idItemSelecionado));
+        System.out.println(String.format("Item de id={%d} deletado com sucesso!", idItemSelecionado));
     }
 }
