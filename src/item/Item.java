@@ -32,20 +32,8 @@ public class Item implements Serializable{
         this.donatario = null;
     }
 
-    public void deletar(){
-        this.status = Status.deletado;
-    }
-
-    public void exibir(){
-        System.out.println(this.toString());
-    }
-
     public void demonstrarInteresse(Doador user, String justificativa){
         this.interessados.add(new Interesse(interessados.size(), user, justificativa));
-    }
-
-    public void doar(){
-        this.status = Status.doado;
     }
 
     public Status getStatus() {
@@ -72,40 +60,20 @@ public class Item implements Serializable{
         return this.nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public TipoItem getTipo() {
         return this.tipo;
-    }
-
-    public void setTipo(TipoItem tipo) {
-        this.tipo = tipo;
     }
 
     public String getDescricao() {
         return this.descricao;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
     public String getLocalizacao() {
         return this.localizacao;
     }
 
-    public void setLocalizacao(String localizacao) {
-        this.localizacao = localizacao;
-    }
-
     public Doador getDoador() {
         return this.doador;
-    }
-
-    public void setDoador(Doador doador) {
-        this.doador = doador;
     }
 
     public ArrayList<Interesse> getInteressados() {
