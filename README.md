@@ -1,6 +1,11 @@
 # Doe Fácil
 
-Sistema de gerenciamento de doações de itens em geral, com funcionamento inteiramente baseado em Interface de Linha de Comando. Este é o trabalho prático da disciplina de Qualidade de Produto de Software, ministrada pela professora Kecia Aline Marques Ferreira, do Centro Federal de Educação Tecnológica de Minas Gerais (CEFET-MG).
+Sistema de gerenciamento de doações de itens em geral, com funcionamento inteiramente baseado em Interface de Linha de Comando. Este é o trabalho prático da disciplina Qualidade de Produto de Software, ministrada pela professora Kecia Aline Marques Ferreira, do Centro Federal de Educação Tecnológica de Minas Gerais (CEFET-MG).
+
+Integrantes do grupo deste trabalho:
+  - Arthur Sabioni
+  - Julia Bindi
+  - Marcus Zuba
 
 ## Vídeo de Demonstração do Sistema
 
