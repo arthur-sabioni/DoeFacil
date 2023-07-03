@@ -20,6 +20,10 @@ Para executar o sistema, uma forma fácil é por meio do Visual Studio Code, seg
 - Abra este projeto
 - Execute o arquivo `Sistema.java`
 
+## Especificação
+
+A especificação do trabalho pode ser visualizada aqui: [Especificação.pdf](Especificacao.pdf).
+
 ## Diagrama de Classes
 
 O diagrama de classes deste sistema pode ser visualizado abaixo (dê zoom para uma melhor visualização dos detalhes):
