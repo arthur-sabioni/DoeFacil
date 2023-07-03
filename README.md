@@ -26,6 +26,6 @@ A especificação do trabalho pode ser visualizada aqui: [Especificação.pdf](E
 
 ## Diagrama de Classes
 
-O diagrama de classes deste sistema pode ser visualizado abaixo (dê zoom para uma melhor visualização dos detalhes):
+O diagrama de classes deste sistema pode ser visualizado abaixo (clique na imagem e dê zoom para uma melhor visualização dos detalhes):
 
 ![DiagramaDeClasses](DiagramaDeClasses.png)
